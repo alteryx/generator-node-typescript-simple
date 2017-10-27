@@ -1,15 +1,11 @@
 {
-  "name": "generator-node-typescript",
+  "name": "generator-node-typescript-simple",
   "version": "4.1.0",
-  "description": "A minimal and opinionated Yeoman Generator for creating NodeJS modules using TypeScript",
+  "description": "A slightly more opinionated version of the node-typescript generator. Mocha tests by default, linter is configured to use the airbnb styleguide, additional scripts and options.",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "ospatil/generator-node-typescript",
-  "author": {
-    "name": "Omkar Patil",
-    "email": "ospatil@gmail.com",
-    "url": "https://github.com/ospatil"
-  },
+  "repository": "alteryx/generator-node-typescript-simple",
+  "author": "alteryx",
   "scripts": {
     "test": "mocha"
   },
