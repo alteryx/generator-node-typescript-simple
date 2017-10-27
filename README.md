@@ -10,7 +10,7 @@ This is a slightly more opinionated version of [generator-node-typescript](https
 - _tslint_- configured to use the [airbnb styleguide](https://github.com/progre/tslint-config-airbnb) with the following exceptions:
   - _[import-name](https://www.npmjs.com/package/tslint-microsoft-contrib)_ rule disabled - js files are normally lowercase, class names are PascalCase. This is a recipe for this rule becoming a royal pain. Disabling it.
 - _prettier_- integrated with tslint for easy autoformatting.
-- **packages private by default** - useful so that internal teams don't accidentally publish to public npm registry.
+- **enterprise friendly** - package is private by default so you don't accidentally publish to public registry. Uses [license-to-fail](https://www.npmjs.com/package/license-to-fail) to automatically fail your build if it detects a license not on your white-list.
 - **no global dependencies**. Every dependency such as _TypeScript_ and _tslint_ is installed locally.
 
 ## Usage
@@ -55,6 +55,7 @@ project/
 │   └── index-tests.ts
 ├── tsconfig.json
 ├── tslint.json
+├── license-config.json
 └── yarn.lock
 ```
 ## Options
@@ -75,15 +76,16 @@ $yo node-typescript-simple --author Bob
     "clean": "rimraf lib",
     "format": "prettier --write --single-quote \"{src,test}/**/*.ts\"",
     "lint": "tslint --force --project tsconfig.json --format verbose \"src/**/*.ts\"",
-    "prepublish": "yarn run build",
-    "build": "yarn run format && yarn run clean && yarn run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "prepublish": "yarn run build && yarn licenses generate-disclaimer > licenses.txt",
+    "build": "yarn run license-check && yarn run format && yarn run clean && yarn run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "debug": "node --inspect --inspect-brk ./lib/index.js",
     "test": "yarn run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-tests.ts\"",
     "test:nyan": "yarn run test -- --reporter nyan",
     "test:tap": "yarn run test -- --reporter tap",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-test.ts\"",
     "watch": "yarn run build -- --watch",
-    "watch:test": "yarn run test -- --watch"
+    "watch:test": "yarn run test -- --watch",
+    "license-check": "license-to-fail ./license-config.js"
   }
 ```
 

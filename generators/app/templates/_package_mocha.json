@@ -19,14 +19,16 @@
     "format": "prettier --write --single-quote \"{src,test}/**/*.ts\"",
     "lint": "tslint --force --project tsconfig.json --format verbose \"src/**/*.ts\"",
     "prepublish": "yarn run build",
-    "build": "yarn run format && yarn run clean && yarn run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "yarn run license-check && yarn run format && yarn run clean && yarn run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "debug": "node --inspect --inspect-brk ./lib/index.js",
     "test": "yarn run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-tests.ts\"",
     "test:nyan": "yarn run test -- --reporter nyan",
     "test:tap": "yarn run test -- --reporter tap",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-tests.ts\"",
     "watch": "yarn run build -- --watch",
-    "watch:test": "yarn run test -- --watch"
+    "watch:test": "yarn run test -- --watch",
+    "license-check": "license-to-fail ./license-config.js",
+    "generate-disclaimer": "yarn licenses generate-disclaimer > licenses.txt"
   },
   "dependencies": {
   },
@@ -34,6 +36,7 @@
     "@types/chai": "^3.0.0",
     "@types/mocha": "^2.0.0",
     "@types/node": "^8.0.0",
+    "license-to-fail": "^2.2.0",
     "chai": "^3.0.0",
     "mocha": "^3.0.0",
     "nyc": "^10.0.0",

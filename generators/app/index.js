@@ -12,13 +12,13 @@ module.exports = Generator.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the minimal but opinionated' + chalk.red('Node TypeScript') + ' generator!'
+      'Welcome to the minimal but opinionated ' + chalk.red('Node TypeScript') + ' generator!'
     ));
 
     this.log(
       chalk.cyan('I simply get down to business of generating, no questions asked!')
       + '\n'
-      + chalk.yellow('Libraries you ask? I use package.json scripts as a task runner and mocha for testing.')
+      + chalk.yellow('Libraries you ask? I use package.json scripts as a task runner and mocha for testing. I use tslint configured with the airbnb styleguide.')
       + '\n'
       + chalk.gray('Can you change these? Of course, it\'s your code. I get out of the way after scaffolding.')
     );
@@ -73,6 +73,10 @@ module.exports = Generator.extend({
       this.fs.copy(
         this.templatePath('editorconfig'),
         this.destinationPath('.editorconfig')
+      );
+      this.fs.copy(
+        this.templatePath('license-config.js'),
+        this.destinationPath('license-config.js')
       );
     }
   },
