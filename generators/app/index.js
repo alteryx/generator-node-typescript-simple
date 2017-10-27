@@ -18,7 +18,7 @@ module.exports = Generator.extend({
     this.log(
       chalk.cyan('I simply get down to business of generating, no questions asked!')
       + '\n'
-      + chalk.yellow('Libraries you ask? I use npm as task runner and jest for testing.')
+      + chalk.yellow('Libraries you ask? I use npm as task runner and mocha for testing.')
       + '\n'
       + chalk.gray('Can you change these? Of course, it\'s your code. I get out of the way after scaffolding.')
     );
@@ -42,12 +42,6 @@ module.exports = Generator.extend({
         this.templatePath('_vscode/settings.json'),
         this.destinationPath('.vscode/settings.json')
       );
-      if (!(this.options.mocha || this.options.ava)) { // copy launch.json only for default jest configuration
-        this.fs.copy(
-          this.templatePath('_vscode/launch.json'),
-          this.destinationPath('.vscode/launch.json')
-        );
-      }
     },
 
     rootFiles: function () {

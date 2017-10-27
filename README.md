@@ -33,7 +33,7 @@ $yo node-typescript-simple
 Generate a new class and test file.
 
 ```sh
-$yo node-typescript:classlib MyNewClass [--mocha | --ava]
+$yo node-typescript:classlib MyNewClass
 ```
 
   ### Integration with VS Code
