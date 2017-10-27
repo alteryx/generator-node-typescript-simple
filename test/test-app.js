@@ -26,9 +26,7 @@ describe('node-typescript:app with mocha', function () {
       'package.json',
       'tsconfig.json',
       'tslint.json',
-      '.travis.yml',
       '.editorconfig',
-      '.gitignore',
       'LICENSE',
       'README.md'
     ]);

@@ -15,7 +15,7 @@ describe('node-typescript:classlib', function () {
           'import * from \'some-library\';'
         );
         fs.outputFileSync(
-          path.join(dir, '__tests__/index-tests.ts'),
+          path.join(dir, 'test/index-tests.ts'),
           'import * as index from \'../src/index\';'
         );
       })
@@ -30,8 +30,8 @@ describe('node-typescript:classlib', function () {
     assert.file([
       'src/customer-inventory-item.ts',
       'src/index.ts',
-      '__tests__/customer-inventory-item-tests.ts',
-      '__tests__/index-tests.ts'
+      'test/customer-inventory-item-tests.ts',
+      'test/index-tests.ts'
     ]);
   });
 });
