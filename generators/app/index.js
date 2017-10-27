@@ -12,13 +12,13 @@ module.exports = Generator.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the minimal ' + chalk.red('Node TypeScript') + ' generator!'
+      'Welcome to the minimal but opinionated' + chalk.red('Node TypeScript') + ' generator!'
     ));
 
     this.log(
       chalk.cyan('I simply get down to business of generating, no questions asked!')
       + '\n'
-      + chalk.yellow('Libraries you ask? I use npm as task runner and mocha for testing.')
+      + chalk.yellow('Libraries you ask? I use package.json scripts as a task runner and mocha for testing.')
       + '\n'
       + chalk.gray('Can you change these? Of course, it\'s your code. I get out of the way after scaffolding.')
     );
@@ -50,7 +50,11 @@ module.exports = Generator.extend({
       this.fs.copyTpl(
         this.templatePath('_package_mocha.json'),
         this.destinationPath('package.json'),
-        { appname: _.kebabCase(path.basename(process.cwd())) }
+        {
+          appname: _.kebabCase(path.basename(process.cwd())),
+          license: this.options['license'],
+          author: this.options['author']
+        }
       );
 
       // copy files common for all configurations
@@ -69,11 +73,6 @@ module.exports = Generator.extend({
       this.fs.copy(
         this.templatePath('editorconfig'),
         this.destinationPath('.editorconfig')
-      );
-      this.fs.copyTpl(
-        this.templatePath('LICENSE'),
-        this.destinationPath('LICENSE'),
-        { year: today.getFullYear().toPrecision(4) }
       );
     }
   },

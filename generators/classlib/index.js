@@ -64,18 +64,17 @@ module.exports = Generator.extend({
       this.templateContext);
 
     const indexSpec = `${testInfo.folder}/index-tests.ts`;
-
     if (!this.fs.exists(indexSpec)) {
       this.fs.copyTpl(
         this.templatePath(testInfo.templates.head),
         this.destinationPath(indexSpec),
         this.templateContext);
-    }
 
-    this._appendTpl(
-      this.templatePath(testInfo.templates.ndx),
-      this.destinationPath(indexSpec),
-      this.templateContext);
+      this._appendTpl(
+        this.templatePath(testInfo.templates.ndx),
+        this.destinationPath(indexSpec),
+        this.templateContext);
+    }
   },
 
   _appendTpl: function (from, to, context, tplSettings, options) {

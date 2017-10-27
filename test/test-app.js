@@ -27,7 +27,6 @@ describe('node-typescript:app with mocha', function () {
       'tsconfig.json',
       'tslint.json',
       '.editorconfig',
-      'LICENSE',
       'README.md'
     ]);
   });
