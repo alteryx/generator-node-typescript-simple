@@ -8,39 +8,55 @@ This is a slightly more opinionated version of [generator-node-typescript](https
 - _mocha_ - test framework.
 - _chai_- assertion library.
 - _tslint_- configured to use the [airbnb styleguide](https://github.com/progre/tslint-config-airbnb) with the following exceptions:
-  - _[import-name](https://www.npmjs.com/package/tslint-microsoft-contrib)_ rule disabled - quickly becomes cumbersome in practice 
+  - _[import-name](https://www.npmjs.com/package/tslint-microsoft-contrib)_ rule disabled - js files are normally lowercase, class names are PascalCase. This is a recipe for this rule becoming a royal pain. Disabling it.
 - _prettier_- integrated with tslint for easy autoformatting.
 - **packages private by default** - useful so that internal teams don't accidentally publish to public npm registry.
 - **no global dependencies**. Every dependency such as _TypeScript_ and _tslint_ is installed locally.
 
 ## Usage
 
-Install `generator-node-typescript-simple` globally.
+Make sure you have yeoman installed globally if you don't already.
+```sh
+yarn add global yo
+```
+Clone `generator-node-typescript-simple` and install its dependencies.
 
 ```sh
-$yarn add global generator-node-typescript-simple
+git clone https://github.com/alteryx/generator-node-typescript-simple.git
+cd generator-node-typescript-simple
+yarn
 ```
 
-Create a new directory and `cd` into it.
+Create your new project directory somewhere and `cd` into it.
+```sh
+mkdir my-new-project
+cd ny-new-project
+```
+
+Path to and run the app generator.
 
 ```sh
-$mkdir my-new-project && cd $_
-
+$yo path/to/repo/generator-node-typescript-simple/generators/app
 ```
 
-Run the generator.
+That's it! Keep reading for more details if you are interested but at this point you are ready to get started. Take a look at the package.json [scripts](##Scripts) for more info.
 
-```sh
-$yo node-typescript-simple
+## What gets generated?
 ```
-
-Build.
+project/
+├── lib/
+├── package.json
+├── README.md
+├── src/
+│   ├── greeter.ts
+│   └── index.ts
+├── test/
+│   ├── greeter-tests.ts
+│   └── index-tests.ts
+├── tsconfig.json
+├── tslint.json
+└── yarn.lock
 ```
-$yarn build
-```
-
-That's it! Keep reading for more details.
-
 ## Options
 
 --license - The package.json license
@@ -74,7 +90,7 @@ $yo node-typescript-simple --author Bob
 You can generate a new class and test file at any point.
 
 ```sh
-$yo node-typescript-simple:classlib MyNewClass
+$yo path/to/repo/generator-node-typescript-simple/generators/classlib MyNewClass
 ```
 
   ### Integration with VS Code
