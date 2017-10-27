@@ -38,7 +38,6 @@
     "nyc": "^10.0.0",
     "prettier": "^1.5.2",
     "rimraf": "^2.0.0",
-    "source-map-support": "^0.5.0",
     "ts-node": "^3.0.0",
     "tslint": "^5.0.0",
     "tslint-config-airbnb": "^5.3.0",

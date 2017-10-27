@@ -3,8 +3,6 @@ const _ = require('lodash');
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 
-const PlatformMap = require('./platform-map');
-
 module.exports = Generator.extend({
   initializing: function () {
     const done = this.async();
@@ -23,8 +21,6 @@ module.exports = Generator.extend({
 
     this.log(yosay(`Generating ${this.templateContext.className}`));
 
-    this.testMap = new PlatformMap();
-
     done();
   },
 
@@ -39,17 +35,7 @@ module.exports = Generator.extend({
     },
 
     testFiles: function () {
-      if (this.options) {
-        if (this.options.mocha || this.options.gulp) {
-          this._writeTestTemplates('mocha');
-        } else if (this.options.ava) {
-          this._writeTestTemplates('ava');
-        } else {
-          this._writeTestTemplates('jest');
-        }
-      } else {
-        this._writeTestTemplates('jest');
-      }
+      this._writeTestTemplates();
     },
 
     indexFile: function () {
@@ -62,14 +48,22 @@ module.exports = Generator.extend({
 
   },
 
-  _writeTestTemplates: function (testPlatform) {
-    const testInfo = this.testMap.getTestPlatformInfo(testPlatform);
+  _writeTestTemplates: function () {
+    const testInfo = {
+      folder: 'test',
+      templates: {
+        head: 'test/index-tests-head.ts',
+        ndx: 'test/index-tests-blueprint.ts',
+        spec: 'test/blueprint-tests.ts',
+      },
+    };
+
     this.fs.copyTpl(
       this.templatePath(testInfo.templates.spec),
-      this.destinationPath(`${testInfo.folder}/${this.templateContext.fileName}-spec.ts`),
+      this.destinationPath(`${testInfo.folder}/${this.templateContext.fileName}-tests.ts`),
       this.templateContext);
 
-    const indexSpec = `${testInfo.folder}/index-spec.ts`;
+    const indexSpec = `${testInfo.folder}/index-tests.ts`;
 
     if (!this.fs.exists(indexSpec)) {
       this.fs.copyTpl(

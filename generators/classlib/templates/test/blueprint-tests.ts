@@ -1,6 +1,3 @@
-<% if (isWindows) { %>
-/// <reference path='../node_modules/@types/mocha/index.d.ts' />
-<% } %>
 import { <%= className %> } from '../src/<%= fileName %>';
 import * as chai from 'chai';
 

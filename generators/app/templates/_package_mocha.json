@@ -2,9 +2,10 @@
   "name": "<%= appname %>",
   "version": "0.0.0",
   "description": "<%= appname %>",
-  "license": "MIT",
   "repository": "",
-  "author": "",
+  "license": "alteryx",
+  "private": true,
+  "author": "alteryx",
   "keywords": [
     ""
   ],
@@ -15,14 +16,17 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib",
-    "format": "prettier --write \"{src,test}/**/*.ts\"",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-		"prepublish": "npm run build",
-    "build": "npm run format && npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
-    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
-    "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
-    "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch"
+    "format": "prettier --write --single-quote \"{src,test}/**/*.ts\"",
+    "lint": "tslint --force --project tsconfig.json --format verbose \"src/**/*.ts\"",
+    "prepublish": "yarn run build",
+    "build": "yarn run format && yarn run clean && yarn run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "debug": "node --inspect --inspect-brk ./lib/index.js",
+    "test": "yarn run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-tests.ts\"",
+    "test:nyan": "yarn run test -- --reporter nyan",
+    "test:tap": "yarn run test -- --reporter tap",
+    "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-test.ts\"",
+    "watch": "yarn run build -- --watch",
+    "watch:test": "yarn run test -- --watch"
   },
   "dependencies": {
   },
@@ -37,9 +41,9 @@
     "rimraf": "^2.0.0",
     "ts-node": "^3.0.0",
     "tslint": "^5.0.0",
+    "tslint-config-airbnb": "^5.3.0",
     "tslint-config-prettier": "^1.1.0",
-    "typescript": "^2.3.0",
-    "coveralls": "^2.0.0"
+    "typescript": "^2.3.0"
   },
   "engines": {
     "node": ">=6.0.0"

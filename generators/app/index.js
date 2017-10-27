@@ -14,7 +14,7 @@ module.exports = Generator.extend({
     this.log(yosay(
       'Welcome to the minimal ' + chalk.red('Node TypeScript') + ' generator!'
     ));
-    
+
     this.log(
       chalk.cyan('I simply get down to business of generating, no questions asked!')
       + '\n'
@@ -27,10 +27,6 @@ module.exports = Generator.extend({
       require.resolve('../classlib'),
       Object.assign({ arguments: ['Greeter'] }, this.options)
     );
-
-    if (this.options.gulp) {
-      throw new Error('Gulp option is no longer supported.');
-    }
 
     done();
   },
@@ -57,41 +53,12 @@ module.exports = Generator.extend({
     rootFiles: function () {
       const today = new Date();
 
-      if (this.options.mocha) { // copy mocha files
-        this.fs.copyTpl(
-          this.templatePath('_package_mocha.json'),
-          this.destinationPath('package.json'),
-          { appname: _.kebabCase(path.basename(process.cwd())) }
-        );
-        this.fs.copy(
-          this.templatePath('travis_mocha.yml'),
-          this.destinationPath('.travis.yml')
-        );
-      } else if (this.options.ava) { // copy ava files
-        this.fs.copyTpl(
-          this.templatePath('_package_ava.json'),
-          this.destinationPath('package.json'),
-          { appname: _.kebabCase(path.basename(process.cwd())) }
-        );
-        this.fs.copy(
-          this.templatePath('travis_ava.yml'),
-          this.destinationPath('.travis.yml')
-        );
-        this.fs.copy(
-          this.templatePath('_tsconfig.test.json'),
-          this.destinationPath('tsconfig.test.json')
-        );
-      } else { // copy files for default jest configuration
-        this.fs.copyTpl(
-          this.templatePath('_package.json'),
-          this.destinationPath('package.json'),
-          { appname: _.kebabCase(path.basename(process.cwd())) }
-        );
-        this.fs.copy(
-          this.templatePath('travis.yml'),
-          this.destinationPath('.travis.yml')
-        );
-      }
+      this.fs.copyTpl(
+        this.templatePath('_package_mocha.json'),
+        this.destinationPath('package.json'),
+        { appname: _.kebabCase(path.basename(process.cwd())) }
+      );
+
       // copy files common for all configurations
       this.fs.copy(
         this.templatePath('README.md'),
@@ -108,10 +75,6 @@ module.exports = Generator.extend({
       this.fs.copy(
         this.templatePath('editorconfig'),
         this.destinationPath('.editorconfig')
-      );
-      this.fs.copy(
-        this.templatePath('gitignore'),
-        this.destinationPath('.gitignore')
       );
       this.fs.copyTpl(
         this.templatePath('LICENSE'),
