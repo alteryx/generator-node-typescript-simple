@@ -1,5 +1,5 @@
 # TypeScript NodeJS Generator
-This is a more opinionated and closed-source-friendly version of [generator-node-typescript](https://github.com/ospatil/generator-node-typescript). Thanks to ospatil for all his hard work! 
+This is a more opinionated and enterprise(closed-source) friendly version of [generator-node-typescript](https://github.com/ospatil/generator-node-typescript). Thanks to ospatil for all his hard work! 
 
 ## Details
 
@@ -10,7 +10,7 @@ This is a more opinionated and closed-source-friendly version of [generator-node
 - _tslint_- configured to use the [airbnb styleguide](https://github.com/progre/tslint-config-airbnb) with the following exceptions:
   - _[import-name](https://www.npmjs.com/package/tslint-microsoft-contrib)_ rule disabled - js files are normally lowercase, class names are PascalCase. This is a recipe for this rule becoming a royal pain. Disabling it.
 - _prettier_- integrated with tslint for easy autoformatting.
-- **enterprise friendly** - package is private by default so you don't accidentally publish to public registry. Uses [license-to-fail](https://www.npmjs.com/package/license-to-fail) to automatically fail your build if it detects a license not on your white-list.
+- **enterprise(closed-source) friendly** - package is private by default so you don't accidentally publish to public registry. Uses [license-to-fail](https://www.npmjs.com/package/license-to-fail) to automatically fail your build if it detects a license not on your white-list.
 - **no global dependencies**. Every dependency such as _TypeScript_ and _tslint_ is installed locally.
 
 ## Usage
