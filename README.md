@@ -1,5 +1,5 @@
 # TypeScript NodeJS Generator
-This is a slightly more opinionated version of [generator-node-typescript](https://github.com/ospatil/generator-node-typescript). Thanks to ospatil! 
+This is a slightly more opinionated version of [generator-node-typescript](https://github.com/ospatil/generator-node-typescript). Thanks to ospatil for all his hard work! 
 
 ## Details
 
